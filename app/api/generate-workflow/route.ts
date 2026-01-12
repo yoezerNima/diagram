@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { generateWorkflowDiagram } from "@/lib/diagram-generator"
 
 export interface WorkflowInput {
   title: string
@@ -22,6 +21,7 @@ export async function POST(request: NextRequest) {
     }
 
     console.log("[v0] Generating workflow diagram")
+    const { generateWorkflowDiagram } = await import("@/lib/diagram-generator")
     const diagramBuffer = await generateWorkflowDiagram({
       title: body.title,
       manualSteps: body.manualSteps,
